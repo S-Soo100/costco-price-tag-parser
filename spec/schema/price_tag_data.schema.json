@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://costco-price-tag-parser/spec/price_tag_data.schema.json",
+  "title": "PriceTagData",
+  "description": "Structured result of parsing a Costco A-format rack card. tagType is 'unknown' only when NEITHER itemNumber NOR finalPrice is found; either may otherwise be null, and all remaining fields are best-effort.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "itemNumber", "plusMark", "nameKo", "model", "nameEn", "finalPrice", "tagType", "discount", "unitPrice", "rawText"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "0.1" },
+    "itemNumber": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{6}$",
+      "description": "6-digit item number (the tracking key). Null when not found."
+    },
+    "plusMark": { "type": "boolean", "description": "True if a '+' immediately followed the item number (meaning TBD; kept raw)." },
+    "nameKo": { "type": ["string", "null"], "description": "RESERVED — not yet extracted by the parser; always null." },
+    "model":  { "type": ["string", "null"], "description": "RESERVED — not yet extracted by the parser; always null." },
+    "nameEn": { "type": ["string", "null"], "description": "Best-effort English product name." },
+    "finalPrice": { "type": ["integer", "null"], "description": "Final price in KRW. The physically largest price token on the tag." },
+    "tagType": { "type": "string", "enum": ["regular", "discount", "unknown"] },
+    "discount": {
+      "description": "Present only when tagType = discount.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["originalPrice", "discountAmount", "periodStart", "periodEnd"],
+          "properties": {
+            "originalPrice":  { "type": ["integer", "null"] },
+            "discountAmount": { "type": ["integer", "null"] },
+            "periodStart":    { "type": ["string", "null"], "description": "ISO date, best-effort (OCR can mangle separators)." },
+            "periodEnd":      { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "unitPrice": {
+      "description": "Unit price next to a '단가 / <unit>' label, when present.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "unit"],
+          "properties": {
+            "value": { "type": "integer" },
+            "unit":  { "type": "string", "description": "e.g. 개, 100G, 10G, 100ml" }
+          }
+        }
+      ]
+    },
+    "rawText": { "type": "string", "description": "Full OCR text (input lines joined by '\\n'). Always kept for re-parse / manual review. Omitted from spec/golden (pass-through, not parsing logic)." }
+  }
+}

@@ -1,0 +1,6 @@
+# Reference OCR adapter deps (optional — the parser core needs none of these).
+pytesseract>=0.3.10
+Pillow>=10.0.0
+# The parser itself, from this monorepo:
+#   pip install -e ../../packages/python
+costco-price-tag-parser

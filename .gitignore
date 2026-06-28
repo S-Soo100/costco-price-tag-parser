@@ -1,0 +1,42 @@
+# ── Dart / Flutter ───────────────────────────────
+# Library packages don't commit their lockfile; the Flutter example app does.
+/packages/dart/pubspec.lock
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+*.iml
+*.ipr
+*.iws
+app.*.symbols
+app.*.map.json
+/examples/flutter_camera_demo/android/app/debug
+/examples/flutter_camera_demo/android/app/profile
+/examples/flutter_camera_demo/android/app/release
+
+# ── Python ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+
+# ── TypeScript / Node ────────────────────────────
+node_modules/
+packages/typescript/dist/
+*.tsbuildinfo
+/coverage/
+
+# ── OS / Editor ──────────────────────────────────
+.DS_Store
+.idea/
+*.log
+*.swp

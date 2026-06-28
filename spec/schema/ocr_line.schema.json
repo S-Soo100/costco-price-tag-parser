@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://costco-price-tag-parser/spec/ocr_line.schema.json",
+  "title": "OcrLine",
+  "description": "One recognized text line plus its normalized bounding box. The parser's input is an ordered list of these (reading order: top-to-bottom, then left-to-right). Origin is TOP-LEFT; all box values are normalized to 0..1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["text", "x", "yTop", "w", "h", "conf"],
+  "properties": {
+    "text": { "type": "string", "description": "Recognized text of the line." },
+    "x":    { "type": "number", "minimum": 0, "maximum": 1, "description": "Left edge of the box (normalized)." },
+    "yTop": { "type": "number", "minimum": 0, "maximum": 1, "description": "Top edge of the box (normalized; 0 = top of image)." },
+    "w":    { "type": "number", "minimum": 0, "maximum": 1, "description": "Box width (normalized)." },
+    "h":    { "type": "number", "minimum": 0, "maximum": 1, "description": "Box height (normalized) — used as glyph-height proxy to find the largest (final) price." },
+    "conf": { "type": "number", "minimum": 0, "maximum": 1, "description": "OCR confidence 0..1 (not used by the parser; carried through for callers)." }
+  }
+}

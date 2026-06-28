@@ -1,0 +1,24 @@
+name: costco_price_tag_demo
+description: "Reference example — pick a Costco price-tag photo, OCR it on-device with ML Kit, parse it with costco_price_tag_parser."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  image_picker: ^1.2.2
+  google_mlkit_text_recognition: ^0.15.1
+  # The parser core, consumed as a local path dependency from this monorepo.
+  costco_price_tag_parser:
+    path: ../../packages/dart
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

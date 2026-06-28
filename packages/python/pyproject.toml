@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "costco-price-tag-parser"
+version = "0.1.0"
+description = "Heuristic parser for Costco A-format price tags. Pure Python, OCR-engine-agnostic."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["costco", "ocr", "price-tag", "parser"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "mypy>=1.8", "ruff>=0.5", "jsonschema>=4.18"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/costco_price_tag_parser"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.mypy]
+strict = true

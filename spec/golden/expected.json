@@ -1,0 +1,638 @@
+{
+  "IMG_3374.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "685246",
+    "plusMark": true,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "1.CO5 pT",
+    "finalPrice": 349900,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": 389900,
+      "discountAmount": 40000,
+      "periodStart": "2026-05-12",
+      "periodEnd": "2026-06-07"
+    },
+    "unitPrice": null
+  },
+  "IMG_3375.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "691901",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SS WINDONFIT AIC",
+    "finalPrice": 779000,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3376.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "669954",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "1219 X 1016 X 150",
+    "finalPrice": 394900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3377.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "678496",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "AIRPODS 4세대 ANC",
+    "finalPrice": 268900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3379.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "649221",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "NIKE SYNTHETIC GLOVES 2PK",
+    "finalPrice": 23890,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 11945,
+      "unit": "개"
+    }
+  },
+  "IMG_3380.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "181944",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "KIRKLAND SIGNATURE",
+    "finalPrice": 41990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3381.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "645807",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "Rg1+Rb1+Rg3 11.6 mg",
+    "finalPrice": 74900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 3121,
+      "unit": "10G"
+    }
+  },
+  "IMG_3382.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "676698",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "EXTRACT CAPSULE",
+    "finalPrice": 155900,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": 194900,
+      "discountAmount": 39000,
+      "periodStart": "6106-01-04",
+      "periodEnd": "2026-00-05"
+    },
+    "unitPrice": {
+      "value": 1732,
+      "unit": "10ml"
+    }
+  },
+  "IMG_3383.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "654718",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "KOR BEF RIBEYE ROAST",
+    "finalPrice": 119900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 11990,
+      "unit": "100G"
+    }
+  },
+  "IMG_3384.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": null,
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "TOMATOES 4KG",
+    "finalPrice": 12490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 312,
+      "unit": "100G"
+    }
+  },
+  "IMG_3385.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "626570",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "COCKTAIL TOMATOES 2KG",
+    "finalPrice": 11490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 575,
+      "unit": "1000"
+    }
+  },
+  "IMG_3386.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "668137",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "( 2KG)",
+    "finalPrice": 6990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 350,
+      "unit": "100G"
+    }
+  },
+  "IMG_3387.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "567723",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "ECO-FRIENDLY CUT & SLICE",
+    "finalPrice": 4490,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": 6490,
+      "discountAmount": 2000,
+      "periodStart": "2026-06-70",
+      "periodEnd": "2026-05-09"
+    },
+    "unitPrice": null
+  },
+  "IMG_3389.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": null,
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "DELMONTE PREMIUM BANANA",
+    "finalPrice": 2690,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 198,
+      "unit": "100G"
+    }
+  },
+  "IMG_3390.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "672014",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SEASONED POLLACK RCE 500G",
+    "finalPrice": 27490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 550,
+      "unit": "10G"
+    }
+  },
+  "IMG_3391.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "669548",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SEASONED CORVINA W/ PLUM",
+    "finalPrice": 37990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 543,
+      "unit": "10G"
+    }
+  },
+  "IMG_3392.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "552101",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "VERRAZZANO CHIANTI CLASSI",
+    "finalPrice": 29990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 3999,
+      "unit": "100ml"
+    }
+  },
+  "IMG_3393.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "667345",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "RAISIN OAT COOKIE 152CT",
+    "finalPrice": 69900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 9120,
+      "unit": "10G"
+    }
+  },
+  "IMG_3394.JPG": {
+    "schemaVersion": "0.1",
+    "itemNumber": "690489",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "MATCHA CREAM RICE CAKE",
+    "finalPrice": 13990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3396.jpg": {
+    "schemaVersion": "0.1",
+    "itemNumber": "200000",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": null,
+    "finalPrice": null,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_3397.jpg": {
+    "schemaVersion": "0.1",
+    "itemNumber": "658874",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "내용량:1, 296g (4,795kcal)",
+    "finalPrice": 4795,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8384.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "685246",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "F25 RT",
+    "finalPrice": 349900,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": 389900,
+      "discountAmount": 40000,
+      "periodStart": null,
+      "periodEnd": null
+    },
+    "unitPrice": null
+  },
+  "IMG_8385.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "669954",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SHARK EVO CORDLESS VACUUM",
+    "finalPrice": 394900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8386.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "678496",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "AIRPODS 4세대",
+    "finalPrice": 198900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8388.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "682981",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "TCL TM REF 250L BLK",
+    "finalPrice": 399900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8389.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "685257",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "ALWAYS TRANSPORT TV/APPLIANCEA",
+    "finalPrice": 1200000,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8390.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "631111",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SAMSUNG C&T",
+    "finalPrice": 229900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8391.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": null,
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "Reduce Fat",
+    "finalPrice": 47990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8392.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "676107",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "Park Golf Set",
+    "finalPrice": 29900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8393.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "694093",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "d in microwave",
+    "finalPrice": 23490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 2349,
+      "unit": "100G"
+    }
+  },
+  "IMG_8394.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "690524",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "FRIED RICE W/ TRIPE",
+    "finalPrice": 13990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 1399,
+      "unit": "100G"
+    }
+  },
+  "IMG_8395.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "682304",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": null,
+    "finalPrice": null,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8396.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "654721",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "KOR BEEF BRISKET",
+    "finalPrice": 64900,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 6490,
+      "unit": "100G"
+    }
+  },
+  "IMG_8397.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "654722",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "묶음번호: L02606021791014",
+    "finalPrice": null,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8398.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "512905",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "TONATOES 40",
+    "finalPrice": 12490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8399.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "200000",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "Item: #512905",
+    "finalPrice": null,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8400.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "668137",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "( 2KG )",
+    "finalPrice": 6990,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": null,
+      "discountAmount": null,
+      "periodStart": null,
+      "periodEnd": null
+    },
+    "unitPrice": null
+  },
+  "IMG_8401.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "672014",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "SEASONED POLLACK ROE 500G",
+    "finalPrice": 27490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 550,
+      "unit": "10G"
+    }
+  },
+  "IMG_8402.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "552101",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "VERRAZZANO CHIANTI CLASSI",
+    "finalPrice": 29990,
+    "tagType": "discount",
+    "discount": {
+      "originalPrice": 36990,
+      "discountAmount": 7000,
+      "periodStart": "2026-06-07",
+      "periodEnd": null
+    },
+    "unitPrice": {
+      "value": 3999,
+      "unit": "100ml"
+    }
+  },
+  "IMG_8403.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "604516",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "PW KOTPMA",
+    "finalPrice": 18990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8404.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "500246",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "CORN OIL",
+    "finalPrice": 15990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": {
+      "value": 444,
+      "unit": "100ml"
+    }
+  },
+  "IMG_8405.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": null,
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "YOCADO C",
+    "finalPrice": 29490,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8406.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "667343",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "ROICI CROSSANT AFX 150",
+    "finalPrice": 19990,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8407.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "260683",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "Tel. 1899-9900",
+    "finalPrice": 139,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8408.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "607021",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "T8 1904-4400",
+    "finalPrice": 2142,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  },
+  "IMG_8409.HEIC": {
+    "schemaVersion": "0.1",
+    "itemNumber": "366309",
+    "plusMark": false,
+    "nameKo": null,
+    "model": null,
+    "nameEn": "내용량:1,584g (4,898kcal)",
+    "finalPrice": 1584,
+    "tagType": "regular",
+    "discount": null,
+    "unitPrice": null
+  }
+}
