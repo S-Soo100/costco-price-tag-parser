@@ -1,5 +1,7 @@
 # costco-price-tag-parser
 
+**[한국어](README.ko.md)** · English
+
 [![conformance](https://github.com/S-Soo100/costco-price-tag-parser/actions/workflows/conformance.yml/badge.svg)](https://github.com/S-Soo100/costco-price-tag-parser/actions/workflows/conformance.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dart](https://img.shields.io/badge/Dart-pure%20%C2%B7%200%20deps-0175C2.svg)](packages/dart)

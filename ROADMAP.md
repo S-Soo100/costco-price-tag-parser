@@ -6,6 +6,10 @@ roughly by effort-to-value; item 4 is the only large one.
 
 Legend: 🟢 quick · 🟡 medium · 🔴 larger / design work
 
+**Status (2026-06-29):** items 1, 2, 5 done; item 4 partially done. **Item 3 and the
+remaining part of item 4 are deferred — not currently scheduled** (item 3 needs the
+owner's registry accounts; the rest of item 4 is a larger design pass).
+
 ---
 
 ## 1. ✅ Fill in repository metadata — **done**
@@ -32,7 +36,7 @@ repo. Regeneration now fetches the photos from the release
 > Note: this required a one-time history rewrite + force-push. Done while the repo
 > was new (no forks/dependents), so the disruption was minimal.
 
-## 3. 🟡 Publish to package registries
+## 3. 🟡 Publish to package registries — deferred (needs owner's accounts)
 
 Ship the three packages so the README install commands work:
 
