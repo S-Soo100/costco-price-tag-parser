@@ -89,8 +89,8 @@ import 'package:costco_price_tag_parser/costco_price_tag_parser.dart';
 final lines = await myOcr.recognize(imagePath); // List<OcrLine>
 final tag = parsePriceTag(lines);
 
-print(tag.itemNumber); // "685246"
-print(tag.finalPrice); // 349900
+print(tag.itemNumber); // "649221"
+print(tag.finalPrice); // 23890
 print(tag.toJson());   // JSON용 Map
 ```
 
@@ -101,8 +101,8 @@ from costco_price_tag_parser import parse_price_tag, OcrLine
 lines = [OcrLine.from_json(e) for e in my_ocr_output]
 tag = parse_price_tag(lines)
 
-print(tag.item_number)   # "685246"
-print(tag.final_price)   # 349900
+print(tag.item_number)   # "649221"
+print(tag.final_price)   # 23890
 print(tag.to_dict())     # camelCase 키 dict
 ```
 
@@ -113,8 +113,8 @@ import { parsePriceTag, type OcrLine } from "costco-price-tag-parser";
 const lines: OcrLine[] = myOcrOutput;
 const tag = parsePriceTag(lines);
 
-tag.itemNumber;       // "685246"
-tag.finalPrice;       // 349900
+tag.itemNumber;       // "649221"
+tag.finalPrice;       // 23890
 JSON.stringify(tag);  // 이미 표준 스키마 형태
 ```
 
@@ -160,28 +160,27 @@ JSON 키는 세 언어 모두 camelCase입니다.
 | `nameKo` / `model` | string \| null | **예약** — 아직 미추출(항상 null) |
 | `rawText` | string | OCR 전체 텍스트(줄을 `\n`으로 연결), 재파싱·검수용으로 항상 보존 |
 
-예시 (`IMG_3374`, 할인 중인 로봇청소기):
+예시 — 픽스처 `IMG_3379`(NIKE 장갑)의 **실제 파서 출력**, `rawText`는 생략:
 
 ```jsonc
 {
   "schemaVersion": "0.1",
-  "itemNumber": "685246",
-  "plusMark": true,
+  "itemNumber": "649221",
+  "plusMark": false,
   "nameKo": null,
   "model": null,
-  "nameEn": "ROBOROCK AQUA VACUUM",
-  "finalPrice": 349900,
-  "tagType": "discount",
-  "discount": {
-    "originalPrice": 389900,
-    "discountAmount": 40000,
-    "periodStart": "2026-05-12",
-    "periodEnd": "2026-06-07"
-  },
-  "unitPrice": null,
+  "nameEn": "NIKE SYNTHETIC GLOVES 2PK",
+  "finalPrice": 23890,
+  "tagType": "regular",
+  "discount": null,
+  "unitPrice": { "value": 11945, "unit": "개" },
   "rawText": "…OCR 전체 텍스트…"
 }
 ```
+
+할인 태그도 파싱됩니다: 할인 태그(예: `IMG_3374`)는 `tagType: "discount"`와 함께
+`discount`에 `originalPrice` / `discountAmount` / `periodStart` / `periodEnd`를 채웁니다
+(그 경우 `389900` / `40000` / `2026-05-12` / `2026-06-07`).
 
 정규식과 동점 처리까지 포함한 정확한 알고리즘은 [`spec/SPEC.md`](spec/SPEC.md)에 언어 중립으로 명세돼 있습니다.
 

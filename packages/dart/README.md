@@ -25,9 +25,9 @@ import 'package:costco_price_tag_parser/costco_price_tag_parser.dart';
 final lines = await myOcr.recognize(imagePath); // List<OcrLine>
 final tag = parsePriceTag(lines);
 
-print(tag.itemNumber); // "685246"
-print(tag.finalPrice); // 349900
-print(tag.tagType);    // TagType.discount
+print(tag.itemNumber); // "649221"
+print(tag.finalPrice); // 23890
+print(tag.tagType);    // TagType.regular
 print(tag.toJson());   // Map<String, dynamic>
 ```
 

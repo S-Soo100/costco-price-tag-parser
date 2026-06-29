@@ -25,8 +25,8 @@ from costco_price_tag_parser import parse_price_tag, OcrLine
 lines = [OcrLine.from_json(e) for e in your_ocr_output]
 
 tag = parse_price_tag(lines)
-print(tag.item_number)   # "685246"
-print(tag.final_price)   # 349900
+print(tag.item_number)   # "649221"
+print(tag.final_price)   # 23890
 print(tag.to_dict())     # JSON-ready (camelCase keys)
 ```
 

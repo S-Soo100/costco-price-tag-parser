@@ -24,8 +24,8 @@ import { parsePriceTag, type OcrLine } from "costco-price-tag-parser";
 const lines: OcrLine[] = ocrOutput; // each: { text, x, yTop, w, h, conf } normalized 0..1
 const tag = parsePriceTag(lines);
 
-tag.itemNumber; // "685246"
-tag.finalPrice; // 349900
+tag.itemNumber; // "649221"
+tag.finalPrice; // 23890
 JSON.stringify(tag); // already the canonical schema shape
 ```
 

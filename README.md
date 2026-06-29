@@ -104,9 +104,9 @@ import 'package:costco_price_tag_parser/costco_price_tag_parser.dart';
 final lines = await myOcr.recognize(imagePath); // List<OcrLine>
 final tag = parsePriceTag(lines);
 
-print(tag.itemNumber);            // "685246"
-print(tag.finalPrice);            // 349900
-print(tag.tagType);               // TagType.discount
+print(tag.itemNumber);            // "649221"
+print(tag.finalPrice);            // 23890
+print(tag.tagType);               // TagType.regular
 print(tag.toJson());              // Map ready for JSON
 ```
 
@@ -117,9 +117,9 @@ from costco_price_tag_parser import parse_price_tag, OcrLine
 lines = [OcrLine.from_json(e) for e in my_ocr_output]
 tag = parse_price_tag(lines)
 
-print(tag.item_number)            # "685246"
-print(tag.final_price)            # 349900
-print(tag.tag_type.value)         # "discount"
+print(tag.item_number)            # "649221"
+print(tag.final_price)            # 23890
+print(tag.tag_type.value)         # "regular"
 print(tag.to_dict())              # dict with camelCase keys
 ```
 
@@ -130,9 +130,9 @@ import { parsePriceTag, type OcrLine } from "costco-price-tag-parser";
 const lines: OcrLine[] = myOcrOutput;
 const tag = parsePriceTag(lines);
 
-tag.itemNumber;                   // "685246"
-tag.finalPrice;                   // 349900
-tag.tagType;                      // "discount"
+tag.itemNumber;                   // "649221"
+tag.finalPrice;                   // 23890
+tag.tagType;                      // "regular"
 JSON.stringify(tag);              // already the canonical shape
 ```
 
@@ -181,28 +181,27 @@ JSON keys are camelCase in all three languages.
 | `nameKo` / `model` | string \| null | **reserved** — not yet extracted (always null) |
 | `rawText` | string | full OCR text (lines joined by `\n`), always kept for re-parse / review |
 
-Example (`IMG_3374`, a discounted robot vacuum):
+Example — the real parser output for fixture `IMG_3379` (NIKE gloves), `rawText` elided:
 
 ```jsonc
 {
   "schemaVersion": "0.1",
-  "itemNumber": "685246",
-  "plusMark": true,
+  "itemNumber": "649221",
+  "plusMark": false,
   "nameKo": null,
   "model": null,
-  "nameEn": "ROBOROCK AQUA VACUUM",
-  "finalPrice": 349900,
-  "tagType": "discount",
-  "discount": {
-    "originalPrice": 389900,
-    "discountAmount": 40000,
-    "periodStart": "2026-05-12",
-    "periodEnd": "2026-06-07"
-  },
-  "unitPrice": null,
+  "nameEn": "NIKE SYNTHETIC GLOVES 2PK",
+  "finalPrice": 23890,
+  "tagType": "regular",
+  "discount": null,
+  "unitPrice": { "value": 11945, "unit": "개" },
   "rawText": "…full OCR text…"
 }
 ```
+
+Discounts are parsed too: a discount tag (e.g. `IMG_3374`) fills `tagType: "discount"`
+and `discount` with `originalPrice` / `discountAmount` / `periodStart` / `periodEnd`
+(there, `389900` / `40000` / `2026-05-12` / `2026-06-07`).
 
 The exact algorithm — every regex and tie-break — is specified language-neutrally
 in [`spec/SPEC.md`](spec/SPEC.md).
