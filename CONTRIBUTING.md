@@ -30,7 +30,13 @@ CI (`.github/workflows/conformance.yml`) runs all three on every push and PR.
 
 ## Adding a fixture / improving accuracy
 
-1. Drop the photo in `sample_tags/`.
+The source photos are **not in the repo** (they're a [release asset](https://github.com/S-Soo100/costco-price-tag-parser/releases/tag/fixtures-source), to keep clones light). To work with them:
+
+1. Fetch and extract the existing photos, then add your new one:
+   ```bash
+   gh release download fixtures-source --pattern 'sample_tags.tar.gz' && tar xzf sample_tags.tar.gz
+   # drop your new photo into sample_tags/
+   ```
 2. Regenerate OCR (macOS / Apple Vision):
    ```bash
    swift tools/vision_ocr.swift sample_tags/*.JPG sample_tags/*.HEIC > spec/fixtures/ocr_raw.json
@@ -38,6 +44,7 @@ CI (`.github/workflows/conformance.yml`) runs all three on every push and PR.
 3. If you hand-verify a tag against the real photo, add explicit assertions to the
    "ground truth" group in each package's conformance test.
 4. Regenerate the golden (step above) and run all three suites.
+5. If you added photos, re-upload the archive: `tar czf sample_tags.tar.gz sample_tags && gh release upload fixtures-source sample_tags.tar.gz --clobber`.
 
 ## Style
 

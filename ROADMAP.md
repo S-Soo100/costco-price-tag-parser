@@ -19,18 +19,18 @@ Every manifest now points at `https://github.com/S-Soo100/costco-price-tag-parse
   `directory`), `bugs`.
 - `LICENSE` → copyright holder set to `Seungsoo Baek`; copied into each package dir.
 
-## 2. 🟡 Slim the repository (`sample_tags/` is ~95 MB)
+## 2. ✅ Slim the repository — **done**
 
-The 46 source photos make clones heavy for a library. Options:
+The 46 source photos (~95 MB) were removed from git history with `git-filter-repo`
+and preserved as the
+[`fixtures-source` release](https://github.com/S-Soo100/costco-price-tag-parser/releases/tag/fixtures-source)
+asset (`sample_tags.tar.gz`). `.git` dropped from ~94 MB to ~324 KB. The derived
+`spec/fixtures/ocr_raw.json` (~220 KB) — all the suites actually need — stays in the
+repo. Regeneration now fetches the photos from the release
+(see [CONTRIBUTING.md](CONTRIBUTING.md) and [`spec/CONFORMANCE.md`](spec/CONFORMANCE.md)).
 
-- Move them to **Git LFS**, or
-- Split them into a separate `*-fixtures` repo and keep only `spec/fixtures/ocr_raw.json` here, or
-- Keep as-is and document the size.
-
-`spec/fixtures/ocr_raw.json` (the derived OCR, ~220 KB) is what the suites actually
-need; the raw photos are only for *regenerating* fixtures (`tools/vision_ocr.swift`).
-
-**Acceptance:** a fresh `git clone` is small; `CONTRIBUTING.md` documents where the source photos live and how to regenerate fixtures.
+> Note: this required a one-time history rewrite + force-push. Done while the repo
+> was new (no forks/dependents), so the disruption was minimal.
 
 ## 3. 🟡 Publish to package registries
 

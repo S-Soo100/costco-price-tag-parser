@@ -51,7 +51,9 @@ from any cwd inside the repo. CI runs all three on every change
 
 ## Adding a fixture
 
-1. Add the photo to `sample_tags/`.
+The source photos live in the [`fixtures-source` release](https://github.com/S-Soo100/costco-price-tag-parser/releases/tag/fixtures-source), not the repo (see [ROADMAP](../ROADMAP.md) item 2).
+
+1. Fetch them: `gh release download fixtures-source --pattern 'sample_tags.tar.gz' && tar xzf sample_tags.tar.gz`, then add your photo to `sample_tags/`.
 2. Regenerate OCR: `swift tools/vision_ocr.swift sample_tags/*.{JPG,HEIC} > spec/fixtures/ocr_raw.json`
    (macOS Vision; emits the same `{text, bbox}` shape as on-device ML Kit).
-3. Regenerate the golden (step above) and re-run all suites.
+3. Regenerate the golden (step above) and re-run all suites. See CONTRIBUTING.md for re-uploading the archive.

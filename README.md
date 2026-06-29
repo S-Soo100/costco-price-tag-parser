@@ -299,9 +299,11 @@ packages/
   typescript/ npm package · ESM + CJS + d.ts
 examples/     flutter_camera_demo · python_tesseract · ts_tesseract       ← optional OCR adapters
 tools/        vision_ocr.swift                                            ← fixture generator (Apple Vision)
-sample_tags/  46 real photos                                             ← fixture sources
-docs/legacy/  original Flutter-app specs (provenance)
+docs/         cross-review-2026-06.md · legacy/ (original Flutter-app specs)
 ```
+
+The 46 source photos are **not in the repo** (to keep clones light) — they live in
+the [`fixtures-source` release](https://github.com/S-Soo100/costco-price-tag-parser/releases/tag/fixtures-source).
 
 ## Development
 
