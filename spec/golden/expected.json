@@ -69,7 +69,7 @@
   },
   "IMG_3380.JPG": {
     "schemaVersion": "0.1",
-    "itemNumber": "181944",
+    "itemNumber": null,
     "plusMark": false,
     "nameKo": null,
     "model": null,
@@ -106,8 +106,8 @@
     "discount": {
       "originalPrice": 194900,
       "discountAmount": 39000,
-      "periodStart": "6106-01-04",
-      "periodEnd": "2026-00-05"
+      "periodStart": null,
+      "periodEnd": null
     },
     "unitPrice": {
       "value": 1732,
@@ -186,8 +186,8 @@
     "discount": {
       "originalPrice": 6490,
       "discountAmount": 2000,
-      "periodStart": "2026-06-70",
-      "periodEnd": "2026-05-09"
+      "periodStart": "2026-05-09",
+      "periodEnd": null
     },
     "unitPrice": null
   },
@@ -261,10 +261,7 @@
     "finalPrice": 69900,
     "tagType": "regular",
     "discount": null,
-    "unitPrice": {
-      "value": 9120,
-      "unit": "10G"
-    }
+    "unitPrice": null
   },
   "IMG_3394.JPG": {
     "schemaVersion": "0.1",
@@ -280,13 +277,13 @@
   },
   "IMG_3396.jpg": {
     "schemaVersion": "0.1",
-    "itemNumber": "200000",
+    "itemNumber": null,
     "plusMark": false,
     "nameKo": null,
     "model": null,
     "nameEn": null,
     "finalPrice": null,
-    "tagType": "regular",
+    "tagType": "unknown",
     "discount": null,
     "unitPrice": null
   },
@@ -297,7 +294,7 @@
     "nameKo": null,
     "model": null,
     "nameEn": "내용량:1, 296g (4,795kcal)",
-    "finalPrice": 4795,
+    "finalPrice": 147,
     "tagType": "regular",
     "discount": null,
     "unitPrice": null
@@ -486,7 +483,7 @@
   },
   "IMG_8399.HEIC": {
     "schemaVersion": "0.1",
-    "itemNumber": "200000",
+    "itemNumber": "512905",
     "plusMark": false,
     "nameKo": null,
     "model": null,
@@ -601,7 +598,7 @@
   },
   "IMG_8407.HEIC": {
     "schemaVersion": "0.1",
-    "itemNumber": "260683",
+    "itemNumber": "260603",
     "plusMark": false,
     "nameKo": null,
     "model": null,
@@ -618,20 +615,20 @@
     "nameKo": null,
     "model": null,
     "nameEn": "T8 1904-4400",
-    "finalPrice": 2142,
+    "finalPrice": null,
     "tagType": "regular",
     "discount": null,
     "unitPrice": null
   },
   "IMG_8409.HEIC": {
     "schemaVersion": "0.1",
-    "itemNumber": "366309",
+    "itemNumber": null,
     "plusMark": false,
     "nameKo": null,
     "model": null,
     "nameEn": "내용량:1,584g (4,898kcal)",
-    "finalPrice": 1584,
-    "tagType": "regular",
+    "finalPrice": null,
+    "tagType": "unknown",
     "discount": null,
     "unitPrice": null
   }

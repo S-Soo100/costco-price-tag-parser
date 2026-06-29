@@ -268,21 +268,26 @@ Tests today: **Dart 52 · Python 98 (52 + 46 schema-validation) · TypeScript 52
 ## Known limitations
 
 The parser is a **heuristic** tuned for the standard A-format rack card, not a
-validator. In particular:
+validator. Several guards are in place (see [`spec/SPEC.md`](spec/SPEC.md)), but the
+core limitation remains:
 
-- **It does not detect non-A-format tags.** Bakery labels, product/scene shots,
-  and blurry tags are *not* reliably marked `unknown` — if any 6-digit run or any
-  `…원` / comma-number appears, it will emit a `regular` tag. A phone number or a
-  weight (`2,142kcal`, `1,584g`) can be picked up as a price.
-- **Dates are best-effort.** OCR routinely mangles them (e.g. `2026.05121`), so a
-  discount's `periodStart` / `periodEnd` may be wrong or impossible (`2026-06-70`).
-  They are parity-locked, **not** ground truth.
-- **`itemNumber` matching is unanchored** — a 6-digit substring of a longer digit
-  run can be captured.
+- **It does not detect non-A-format tags.** Bakery labels, receipts, and scene
+  shots are *not* marked `unknown` if any plausible item number or `…원` price is
+  found — the parser still emits a `regular` tag, and a stray price-like token
+  (e.g. a `139원` hotline number) can be picked up. Proper non-A-format detection
+  is the main open item — see [ROADMAP item 4](ROADMAP.md).
+- **An item number OCR'd as 7+ digits yields `null`.** The digit-boundary guard
+  correctly rejects 6-digit barcode substrings, but also declines a genuine item
+  number that OCR merged with an extra digit (`1819440`) — `null` rather than a guess.
+- **Dates are best-effort.** Calendar-impossible dates are now dropped (year
+  2000–2099, month 1–12, day 1–31), but OCR can still yield a *plausible-but-wrong*
+  date — treat `periodStart` / `periodEnd` as advisory, not ground truth.
+
+Already guarded: nutrition/weight figures (`2,142kcal`, `1,584g`) are no longer
+mistaken for prices; impossible dates are dropped; 6-digit barcode substrings are
+rejected.
 
 Treat low-confidence output as *"needs human review"* rather than authoritative.
-Hardening these heuristics is the main open work item — see
-[ROADMAP §4](ROADMAP.md#4--harden-the-parsing-heuristics-the-real-feature-work).
 
 ## Repository layout
 

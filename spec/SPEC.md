@@ -34,12 +34,17 @@ write `[0-9]` literally and do **not** pass `re.ASCII` — that flag would also 
 | name | pattern | use |
 |------|---------|-----|
 | `pureItem` | `^(\d{6})(\+?)$` | a line that is ONLY a 6-digit number (+ optional `+`) |
-| `item` | `(\d{6})(\+?)` | a 6-digit number anywhere |
+| `item` | `(?<!\d)(\d{6})(?!\d)(\+?)` | a 6-digit number **not inside a longer digit run** (digit boundaries) |
 | `price` | `(\d[\d,]{2,})\s*원` | a price followed by `원` |
 | `commaNum` | `\d{1,3}(?:,\d{3})+` | a comma-grouped number whose `원` was split off by OCR |
+| `weightUnit` | `^\s*(?:kcal\|kg\|mg\|ml\|g\|l)` (case-insensitive) | marks a nutrition/weight figure (applied to the text right after a `commaNum`) |
 | `date` | `(\d{4})[.\/](\d{1,2})[.\/]?(\d{1,2})` | a date like `2026.05.21` or `2026/5/7` |
 | `unit` | `단가\s*/\s*([^\s]+)` | the `단가 / <unit>` label |
 | `latin` | `[A-Za-z]` | presence of a Latin letter |
+
+`item` uses digit lookbehind/lookahead (`(?<!\d)…(?!\d)`) so a 6-digit window inside a
+barcode or a 7-digit OCR slip (`3663092`, `1819440`) is rejected. All three target
+runtimes support lookbehind (Dart, Python `re`, JS/ES2018+).
 
 ## Algorithm
 
@@ -54,7 +59,10 @@ Let `rawText` = every line's `text` joined by `"\n"`, and `blob` = joined by a s
 ### 2. Price tokens
 For each line, derive at most one integer price value `v`:
 - If `price` matches, take group 1, delete commas, parse int → `v`.
-- Else if `commaNum` matches, take match 0, delete commas, parse int → `v`.
+- Else if `commaNum` matches **and** the text immediately after the match does **not**
+  match `weightUnit`, take match 0, delete commas, parse int → `v`. (A comma-number
+  followed by `kcal`/`g`/`kg`/`mg`/`ml`/`l` is a nutrition/weight figure — e.g.
+  `"2,142kcal"`, `"1,584g"` — not a price, so it yields no token.)
 - Else: no token for this line.
 
 For every produced `v`, keep a token `{ v, h: line.h, y: line.yTop }`, **in input order**.
@@ -67,10 +75,15 @@ For every produced `v`, keep a token `{ v, h: line.h, y: line.yTop }`, **in inpu
 - If `itemNumber` is null **and** `finalPrice` is null → `tagType = "unknown"`.
 - Else → `"discount"` if `isDiscount`, otherwise `"regular"`.
 
-### 5. discount (only when `isDiscount`)
+### 5. discount (only when `tagType` == `"discount"`)
+Built only when the tag is a discount — i.e. `isDiscount` **and** not `unknown` (so a
+stray `할인행사` with no item or price yields `discount = null`, matching the schema).
 - `originalPrice` = the **largest** token value strictly **greater than** `finalPrice` (null if `finalPrice` is null or no token exceeds it).
 - `discountAmount` = `originalPrice − finalPrice` when both exist, else null.
-- Collect all `date` matches over `blob`, in order. `periodStart` = match 0, `periodEnd` = match 1 (if present), each formatted `YYYY-MM-DD` with month/day **zero-padded to 2 digits**. Missing → null.
+- Collect `date` matches over `blob`, in order, **keeping only calendar-plausible ones**:
+  year `2000–2099`, month `1–12`, day `1–31` (OCR mangles dates, e.g. `2026.06.70`).
+  `periodStart` = first valid date, `periodEnd` = second (if present), each formatted
+  `YYYY-MM-DD` with month/day **zero-padded to 2 digits**. Missing → null.
 - When not a discount tag, `discount` = null.
 
 ### 6. unitPrice

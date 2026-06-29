@@ -47,24 +47,29 @@ Each needs the owner's registry account + 2FA. Consider automating with a
 
 ## 4. 🔴 Harden the parsing heuristics (the real feature work)
 
-The review showed the parser is naive on **non-A-format** input and unvalidated
-dates (see [Known limitations](README.md#known-limitations) and review items
-C3 / single-model findings). This is deferred because each change ripples the
-golden and must be re-verified across all three ports. Candidate work:
+**Partially done (2026-06-29).** Three guards landed across all three ports with
+trap tests; golden regenerated and diff-reviewed (8 fixtures improved, 1 honest
+regression, ground-truth unchanged):
 
-- **Context guards for prices** — don't treat phone numbers (`139원` in body text),
-  weights/energy (`2,142kcal`, `1,584g`) as the final price.
-- **Anchor `itemNumber`** — avoid capturing a 6-digit substring of a longer digit run.
-- **Validate dates** — reject impossible months/days (`2026-06-70`, `2026-00-05`);
-  treat an OCR-mangled date as absent rather than guessing.
-- **Detect non-A-format tags** — return `unknown` (or a confidence signal) for
-  bakery labels / scene shots instead of emitting a `regular` tag.
-- For each: add a **trap fixture/unit test** so the conformance suite actually
-  exercises it, then regenerate the golden (`dart run tool/gen_golden.dart`).
+- ✅ **Weight/energy guard** — a comma-number followed by `kcal`/`g`/`kg`/`mg`/`ml`/`l`
+  is no longer treated as a price (`2,142kcal`, `1,584g`).
+- ✅ **Anchor `itemNumber`** — digit boundaries reject a 6-digit substring of a longer
+  run (barcodes, `ITEM: 3663092`, `2000005…`). Trade-off: an item OCR'd as 7 digits
+  (`1819440`) now yields `null` rather than a lucky guess.
+- ✅ **Validate dates** — drop calendar-impossible dates (year 2000–2099, month 1–12,
+  day 1–31): `2026-06-70`, `2026-00-05`, year `6106`.
+
+**Still open:**
+
+- **Detect non-A-format tags** — bakery labels / receipts / scene shots should return
+  `unknown` (or a confidence score) instead of a `regular` tag assembled from stray
+  tokens (e.g. a `139원` hotline number). This is the hard part: it needs a structural
+  confidence signal and ideally the source photos to verify, so it warrants a
+  dedicated pass.
+- (Optional) recover a genuine 7-digit-OCR'd item number instead of `null`, once
+  non-A-format detection can tell it apart from barcode noise.
 
 **Process:** change `packages/dart` first (canonical) → regen golden → match Python & TS → all suites green. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-**Acceptance:** the listed mis-parses no longer occur on representative inputs; new trap tests guard them; the three suites stay green.
 
 ## 5. 🟢 Decide on `reports/`
 

@@ -91,4 +91,40 @@ describe("parity traps (synthetic inputs)", () => {
     expect(tag.finalPrice).toBe(12345);
     expect(tag.itemNumber).toBe("685246");
   });
+
+  it("a nutrition/weight figure is not taken as the price", () => {
+    // "1,584g" is taller (bigger h) — without the weight guard it would win.
+    const tag = parsePriceTag([
+      { text: "685246", x: 0.3, yTop: 0.1, w: 0.1, h: 0.03, conf: 1 },
+      { text: "1,584g", x: 0.3, yTop: 0.4, w: 0.2, h: 0.2, conf: 1 },
+      { text: "9,900원", x: 0.3, yTop: 0.6, w: 0.2, h: 0.1, conf: 1 },
+    ]);
+    expect(tag.finalPrice).toBe(9900);
+    expect(tag.itemNumber).toBe("685246");
+  });
+
+  it("a 6-digit run inside a longer number is not an item number", () => {
+    expect(
+      parsePriceTag([{ text: "ITEM: 3663092", x: 0.1, yTop: 0.3, w: 0.3, h: 0.05, conf: 1 }])
+        .itemNumber,
+    ).toBeNull();
+    // …but a properly bounded 6-digit run still is.
+    expect(
+      parsePriceTag([{ text: "#512905", x: 0.1, yTop: 0.3, w: 0.2, h: 0.05, conf: 1 }]).itemNumber,
+    ).toBe("512905");
+  });
+
+  it("a calendar-implausible date is dropped", () => {
+    const tag = parsePriceTag([
+      { text: "685246", x: 0.3, yTop: 0.1, w: 0.1, h: 0.03, conf: 1 },
+      { text: "할인행사", x: 0.3, yTop: 0.2, w: 0.2, h: 0.03, conf: 1 },
+      { text: "10,000원", x: 0.3, yTop: 0.5, w: 0.2, h: 0.2, conf: 1 },
+      { text: "20,000원", x: 0.3, yTop: 0.3, w: 0.2, h: 0.05, conf: 1 },
+      { text: "2026.13.45", x: 0.3, yTop: 0.7, w: 0.2, h: 0.03, conf: 1 },
+    ]);
+    expect(tag.tagType).toBe("discount");
+    expect(tag.discount?.originalPrice).toBe(20000);
+    expect(tag.discount?.periodStart).toBeNull();
+    expect(tag.discount?.periodEnd).toBeNull();
+  });
 });

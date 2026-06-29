@@ -6,9 +6,13 @@
 import type { DiscountInfo, OcrLine, PriceTagData, TagType, UnitPrice } from "./types.js";
 
 const PURE_ITEM = /^(\d{6})(\+?)$/;
-const ITEM = /(\d{6})(\+?)/;
+// Digit boundaries so a 6-digit run inside a longer number (barcodes,
+// "ITEM: 3663092") is NOT mistaken for an item number.
+const ITEM = /(?<!\d)(\d{6})(?!\d)(\+?)/;
 const PRICE = /(\d[\d,]{2,})\s*원/;
 const COMMA_NUM = /\d{1,3}(?:,\d{3})+/;
+// A comma-number followed by one of these is a nutrition/weight figure, not a price.
+const WEIGHT_UNIT = /^\s*(?:kcal|kg|mg|ml|g|l)/i;
 const DATE = /(\d{4})[.\/](\d{1,2})[.\/]?(\d{1,2})/g;
 const UNIT = /단가\s*\/\s*([^\s]+)/;
 const LATIN = /[A-Za-z]/;
@@ -21,6 +25,15 @@ interface PT {
 
 const pad = (s: string | undefined): string => (s ?? "").padStart(2, "0");
 const despace = (s: string): string => s.replace(/ /g, "");
+
+/** ISO `YYYY-MM-DD`, or null when the date is out of calendar range. */
+function isoDate(m: RegExpMatchArray): string | null {
+  const y = +m[1];
+  const mo = +m[2];
+  const d = +m[3];
+  if (y < 2000 || y > 2099 || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+  return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
+}
 
 export function parsePriceTag(lines: OcrLine[]): PriceTagData {
   const raw = lines.map((l) => l.text).join("\n");
@@ -55,7 +68,10 @@ export function parsePriceTag(lines: OcrLine[]): PriceTagData {
       v = parseInt(m[1].replace(/,/g, ""), 10);
     } else {
       const cm = COMMA_NUM.exec(l.text); // price whose '원' got split off
-      if (cm) v = parseInt(cm[0].replace(/,/g, ""), 10);
+      // …unless it's a nutrition/weight figure (e.g. "2,142kcal"), not a price.
+      if (cm && !WEIGHT_UNIT.test(l.text.slice(cm.index + cm[0].length))) {
+        v = parseInt(cm[0].replace(/,/g, ""), 10);
+      }
     }
     if (v !== null) pts.push({ v, h: l.h, y: l.yTop });
   }
@@ -84,11 +100,10 @@ export function parsePriceTag(lines: OcrLine[]): PriceTagData {
       }
     }
     const amt = orig !== null && finalPrice !== null ? orig - finalPrice : null;
-    const dates = [...blob.matchAll(DATE)];
-    let ps: string | null = null;
-    let pe: string | null = null;
-    if (dates.length > 0) ps = `${dates[0][1]}-${pad(dates[0][2])}-${pad(dates[0][3])}`;
-    if (dates.length > 1) pe = `${dates[1][1]}-${pad(dates[1][2])}-${pad(dates[1][3])}`;
+    // Keep only calendar-plausible dates (OCR mangles them, e.g. 2026-06-70).
+    const dates = [...blob.matchAll(DATE)].map(isoDate).filter((d): d is string => d !== null);
+    const ps: string | null = dates.length > 0 ? dates[0] : null;
+    const pe: string | null = dates.length > 1 ? dates[1] : null;
     disc = { originalPrice: orig, discountAmount: amt, periodStart: ps, periodEnd: pe };
   }
 

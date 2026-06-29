@@ -45,7 +45,11 @@ PriceTagData parsePriceTag(List<OcrLine> lines) {
       v = int.tryParse(m.group(1)!.replaceAll(',', ''));
     } else {
       final cm = _commaNum.firstMatch(l.text); // price whose '원' got split off
-      if (cm != null) v = int.tryParse(cm.group(0)!.replaceAll(',', ''));
+      // …unless it's a nutrition/weight figure (e.g. "2,142kcal", "1,584g"),
+      // which is not a price. See spec/SPEC.md.
+      if (cm != null && !_weightUnitRe.hasMatch(l.text.substring(cm.end))) {
+        v = int.tryParse(cm.group(0)!.replaceAll(',', ''));
+      }
     }
     if (v != null) pts.add(_PT(v, l.h, l.yTop));
   }
@@ -72,14 +76,10 @@ PriceTagData parsePriceTag(List<OcrLine> lines) {
       }
     }
     final amt = (orig != null && finalPrice != null) ? orig - finalPrice : null;
-    final dates = _dateRe.allMatches(blob).toList();
-    String? ps, pe;
-    if (dates.isNotEmpty) {
-      ps = '${dates[0].group(1)}-${_pad(dates[0].group(2))}-${_pad(dates[0].group(3))}';
-    }
-    if (dates.length > 1) {
-      pe = '${dates[1].group(1)}-${_pad(dates[1].group(2))}-${_pad(dates[1].group(3))}';
-    }
+    // Keep only calendar-plausible dates (OCR mangles them, e.g. 2026-06-70).
+    final dates = _dateRe.allMatches(blob).map(_isoDate).whereType<String>().toList();
+    final ps = dates.isNotEmpty ? dates[0] : null;
+    final pe = dates.length > 1 ? dates[1] : null;
     disc = DiscountInfo(originalPrice: orig, discountAmount: amt, periodStart: ps, periodEnd: pe);
   }
 
@@ -128,10 +128,14 @@ PriceTagData parsePriceTag(List<OcrLine> lines) {
   );
 }
 
-final _itemRe = RegExp(r'(\d{6})(\+?)');
+// Digit boundaries so a 6-digit run inside a longer number (barcodes, "ITEM: 3663092")
+// is NOT mistaken for an item number.
+final _itemRe = RegExp(r'(?<!\d)(\d{6})(?!\d)(\+?)');
 final _pureItemRe = RegExp(r'^(\d{6})(\+?)$');
 final _priceRe = RegExp(r'(\d[\d,]{2,})\s*원');
 final _commaNum = RegExp(r'\d{1,3}(?:,\d{3})+');
+// A comma-number followed by one of these is a nutrition/weight figure, not a price.
+final _weightUnitRe = RegExp(r'^\s*(?:kcal|kg|mg|ml|g|l)', caseSensitive: false);
 final _dateRe = RegExp(r'(\d{4})[.\/](\d{1,2})[.\/]?(\d{1,2})');
 final _unitRe = RegExp(r'단가\s*/\s*([^\s]+)');
 final _hasLatin = RegExp(r'[A-Za-z]');
@@ -151,3 +155,13 @@ class _PT {
 }
 
 String _pad(String? s) => (s ?? '').padLeft(2, '0');
+
+/// Formats a date match as ISO `YYYY-MM-DD`, or null when month/day are out of
+/// calendar range (OCR routinely mangles dates, e.g. `2026.06.70`).
+String? _isoDate(RegExpMatch m) {
+  final y = int.parse(m.group(1)!);
+  final mo = int.parse(m.group(2)!);
+  final d = int.parse(m.group(3)!);
+  if (y < 2000 || y > 2099 || mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+  return '${m.group(1)}-${_pad(m.group(2))}-${_pad(m.group(3))}';
+}

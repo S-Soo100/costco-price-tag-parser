@@ -91,6 +91,41 @@ void main() {
       expect(tag.finalPrice, 12345);
       expect(tag.itemNumber, '685246');
     });
+
+    test('a nutrition/weight figure is not taken as the price', () {
+      // "1,584g" is taller (bigger h) — without the weight guard it would win.
+      final tag = parsePriceTag(const [
+        OcrLine(text: '685246', x: 0.3, yTop: 0.1, w: 0.1, h: 0.03, conf: 1),
+        OcrLine(text: '1,584g', x: 0.3, yTop: 0.4, w: 0.2, h: 0.20, conf: 1),
+        OcrLine(text: '9,900원', x: 0.3, yTop: 0.6, w: 0.2, h: 0.10, conf: 1),
+      ]);
+      expect(tag.finalPrice, 9900);
+      expect(tag.itemNumber, '685246');
+    });
+
+    test('a 6-digit run inside a longer number is not an item number', () {
+      expect(parsePriceTag(const [
+        OcrLine(text: 'ITEM: 3663092', x: 0.1, yTop: 0.3, w: 0.3, h: 0.05, conf: 1),
+      ]).itemNumber, isNull);
+      // …but a properly bounded 6-digit run still is.
+      expect(parsePriceTag(const [
+        OcrLine(text: '#512905', x: 0.1, yTop: 0.3, w: 0.2, h: 0.05, conf: 1),
+      ]).itemNumber, '512905');
+    });
+
+    test('a calendar-implausible date is dropped', () {
+      final tag = parsePriceTag(const [
+        OcrLine(text: '685246', x: 0.3, yTop: 0.1, w: 0.1, h: 0.03, conf: 1),
+        OcrLine(text: '할인행사', x: 0.3, yTop: 0.2, w: 0.2, h: 0.03, conf: 1),
+        OcrLine(text: '10,000원', x: 0.3, yTop: 0.5, w: 0.2, h: 0.20, conf: 1),
+        OcrLine(text: '20,000원', x: 0.3, yTop: 0.3, w: 0.2, h: 0.05, conf: 1),
+        OcrLine(text: '2026.13.45', x: 0.3, yTop: 0.7, w: 0.2, h: 0.03, conf: 1),
+      ]);
+      expect(tag.tagType, TagType.discount);
+      expect(tag.discount?.originalPrice, 20000);
+      expect(tag.discount?.periodStart, isNull);
+      expect(tag.discount?.periodEnd, isNull);
+    });
   });
 }
 

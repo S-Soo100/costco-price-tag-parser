@@ -13,9 +13,13 @@ from .models import DiscountInfo, OcrLine, PriceTagData, TagType, UnitPrice
 # re.ASCII would ALSO make `\s` ASCII-only, diverging from Dart/JS where `\s` is
 # Unicode (e.g. matches NBSP / full-width space between a price and 원).
 _PURE_ITEM = re.compile(r"^([0-9]{6})(\+?)$")
-_ITEM = re.compile(r"([0-9]{6})(\+?)")
+# Digit boundaries so a 6-digit run inside a longer number (barcodes,
+# "ITEM: 3663092") is NOT mistaken for an item number.
+_ITEM = re.compile(r"(?<![0-9])([0-9]{6})(?![0-9])(\+?)")
 _PRICE = re.compile(r"([0-9][0-9,]{2,})\s*원")
 _COMMA_NUM = re.compile(r"[0-9]{1,3}(?:,[0-9]{3})+")
+# A comma-number followed by one of these is a nutrition/weight figure, not a price.
+_WEIGHT_UNIT = re.compile(r"^\s*(?:kcal|kg|mg|ml|g|l)", re.IGNORECASE)
 _DATE = re.compile(r"([0-9]{4})[.\/]([0-9]{1,2})[.\/]?([0-9]{1,2})")
 _UNIT = re.compile(r"단가\s*/\s*([^\s]+)")
 _LATIN = re.compile(r"[A-Za-z]")
@@ -23,6 +27,15 @@ _LATIN = re.compile(r"[A-Za-z]")
 
 def _pad(s: str | None) -> str:
     return (s or "").rjust(2, "0")
+
+
+def _iso_date(m: re.Match[str]) -> str | None:
+    """ISO `YYYY-MM-DD`, or None when the date is out of calendar range (OCR
+    routinely mangles dates, e.g. `2026.06.70`)."""
+    y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if not (2000 <= y <= 2099 and 1 <= mo <= 12 and 1 <= d <= 31):
+        return None
+    return f"{m.group(1)}-{_pad(m.group(2))}-{_pad(m.group(3))}"
 
 
 def parse_price_tag(lines: list[OcrLine]) -> PriceTagData:
@@ -58,7 +71,8 @@ def parse_price_tag(lines: list[OcrLine]) -> PriceTagData:
             v = int(m.group(1).replace(",", ""))
         else:
             cm = _COMMA_NUM.search(ln.text)  # price whose '원' got split off
-            if cm:
+            # …unless it's a nutrition/weight figure (e.g. "2,142kcal"), not a price.
+            if cm and not _WEIGHT_UNIT.match(ln.text[cm.end() :]):
                 v = int(cm.group(0).replace(",", ""))
         if v is not None:
             pts.append((v, ln.h, ln.y_top))
@@ -84,12 +98,10 @@ def parse_price_tag(lines: list[OcrLine]) -> PriceTagData:
                 if p[0] > final_price and (orig is None or p[0] > orig):
                     orig = p[0]
         amt = orig - final_price if (orig is not None and final_price is not None) else None
-        dates = list(_DATE.finditer(blob))
-        ps = pe = None
-        if dates:
-            ps = f"{dates[0].group(1)}-{_pad(dates[0].group(2))}-{_pad(dates[0].group(3))}"
-        if len(dates) > 1:
-            pe = f"{dates[1].group(1)}-{_pad(dates[1].group(2))}-{_pad(dates[1].group(3))}"
+        # Keep only calendar-plausible dates (OCR mangles them, e.g. 2026-06-70).
+        dates = [d for d in (_iso_date(m) for m in _DATE.finditer(blob)) if d]
+        ps = dates[0] if dates else None
+        pe = dates[1] if len(dates) > 1 else None
         disc = DiscountInfo(orig, amt, ps, pe)
 
     # --- unit price: "단가 / <unit>" label + nearest small price ---
