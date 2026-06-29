@@ -257,7 +257,7 @@ Two kinds of guarantee (full policy in [`spec/CONFORMANCE.md`](spec/CONFORMANCE.
 
 Because the fixtures can't exercise every divergence, the suites also include
 **synthetic "parity trap" tests** for the cross-language hazards the
-[code review](reports/costco-price-tag-parser-review-final.md) surfaced — e.g. a
+[code review](docs/cross-review-2026-06.md) surfaced — e.g. a
 non-ASCII space (NBSP) inside a price, and two item-number candidates sharing the
 same `yTop` (resolved deterministically by an `x` tie-break). Porting notes for
 these traps (ASCII digits, code-point iteration, sort determinism) are in

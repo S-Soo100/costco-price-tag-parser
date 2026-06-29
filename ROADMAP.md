@@ -1,7 +1,7 @@
 # Roadmap / TODO
 
 Post-launch backlog, captured 2026-06-28 after the baseline push and the
-[cross-model review](reports/costco-price-tag-parser-review-final.md). Ordered
+[cross-model review](docs/cross-review-2026-06.md). Ordered
 roughly by effort-to-value; item 4 is the only large one.
 
 Legend: 🟢 quick · 🟡 medium · 🔴 larger / design work
@@ -71,13 +71,11 @@ regression, ground-truth unchanged):
 
 **Process:** change `packages/dart` first (canonical) → regen golden → match Python & TS → all suites green. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 5. 🟢 Decide on `reports/`
+## 5. ✅ Decide on the cross-review log — **done**
 
-`reports/costco-price-tag-parser-review-final.md` (the candid cross-review +
-resolution log) is currently public. Either keep it for transparency, move it to
-`docs/`, or remove it from the published tree.
-
-**Acceptance:** a deliberate decision is made and reflected in the repo.
+Kept for transparency and moved out of the root to
+[`docs/cross-review-2026-06.md`](docs/cross-review-2026-06.md) (the candid
+cross-review + resolution log). The root `reports/` directory was removed.
 
 ---
 
