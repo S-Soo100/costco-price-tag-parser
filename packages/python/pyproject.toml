@@ -9,6 +9,7 @@ description = "Heuristic parser for Costco A-format price tags. Pure Python, OCR
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
+authors = [{ name = "Seungsoo Baek" }]
 keywords = ["costco", "ocr", "price-tag", "parser"]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -16,6 +17,11 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/S-Soo100/costco-price-tag-parser"
+Repository = "https://github.com/S-Soo100/costco-price-tag-parser"
+Issues = "https://github.com/S-Soo100/costco-price-tag-parser/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "mypy>=1.8", "ruff>=0.5", "jsonschema>=4.18"]

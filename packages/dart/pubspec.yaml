@@ -3,7 +3,8 @@ description: >
   Heuristic parser that turns OCR text lines from a Costco A-format price tag
   into structured PriceTagData. Pure Dart, OCR-engine-agnostic.
 version: 0.1.0
-# repository: https://github.com/<owner>/costco-price-tag-parser
+repository: https://github.com/S-Soo100/costco-price-tag-parser
+issue_tracker: https://github.com/S-Soo100/costco-price-tag-parser/issues
 
 environment:
   sdk: ^3.0.0

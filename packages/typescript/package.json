@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "description": "Heuristic parser for Costco A-format price tags. Pure TypeScript, OCR-engine-agnostic.",
   "license": "MIT",
+  "author": "Seungsoo Baek (https://github.com/S-Soo100)",
+  "homepage": "https://github.com/S-Soo100/costco-price-tag-parser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/S-Soo100/costco-price-tag-parser.git",
+    "directory": "packages/typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/S-Soo100/costco-price-tag-parser/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
