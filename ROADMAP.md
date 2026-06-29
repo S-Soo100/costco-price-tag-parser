@@ -8,17 +8,16 @@ Legend: 🟢 quick · 🟡 medium · 🔴 larger / design work
 
 ---
 
-## 1. 🟢 Fill in repository metadata
+## 1. ✅ Fill in repository metadata — **done**
 
-The package manifests still have placeholder / missing repo links. Now that the
-repo lives at `https://github.com/S-Soo100/costco-price-tag-parser`, set:
+Every manifest now points at `https://github.com/S-Soo100/costco-price-tag-parser`:
 
-- `packages/dart/pubspec.yaml` → uncomment & set `repository:`
-- `packages/python/pyproject.toml` → add `[project.urls]` (Homepage, Repository, Issues)
-- `packages/typescript/package.json` → add `repository`, `bugs`, `homepage`, `author`
-- `LICENSE` → replace `costco-price-tag-parser contributors` with the real copyright holder if desired
-
-**Acceptance:** each manifest points at the GitHub repo; `npm pkg fix` / `dart pub publish --dry-run` show no metadata warnings.
+- `packages/dart/pubspec.yaml` → `repository` + `issue_tracker`; added `README.md`,
+  `CHANGELOG.md`, `LICENSE` (pub.dev requirements) — `dart pub publish --dry-run` is clean.
+- `packages/python/pyproject.toml` → `authors` + `[project.urls]`.
+- `packages/typescript/package.json` → `author`, `homepage`, `repository` (with monorepo
+  `directory`), `bugs`.
+- `LICENSE` → copyright holder set to `Seungsoo Baek`; copied into each package dir.
 
 ## 2. 🟡 Slim the repository (`sample_tags/` is ~95 MB)
 
