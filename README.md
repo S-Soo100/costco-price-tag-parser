@@ -264,7 +264,7 @@ same `yTop` (resolved deterministically by an `x` tie-break). Porting notes for
 these traps (ASCII digits, code-point iteration, sort determinism) are in
 [`spec/SPEC.md`](spec/SPEC.md#determinism--parity-notes).
 
-Tests today: **Dart 52 · Python 98 (52 + 46 schema-validation) · TypeScript 52**.
+Tests today: **Dart 55 · Python 101 (55 + 46 schema-validation) · TypeScript 55**.
 
 ## Known limitations
 
